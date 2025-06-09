@@ -1,0 +1,26 @@
+<div class="m-5">
+  <input class="m-3" type="text" [(ngModel)]="name">
+  <input class ="m-3" type="text" [(ngModel)]="grade">
+  <button class="btn btn-primary" (click)="addStudent()">Add Student</button>
+
+  <p *ngIf="students.length === 0">No Students Found.</p>
+
+  <div *ngFor="let student of students">
+    <p>
+      {{student.name}} - Grade: {{student.grade}}
+    </p>
+
+    <div [ngSwitch]="student.grade">
+      <p *ngSwitchCase="'A'">Excellent</p>
+      <p *ngSwitchCase="'B'">Good</p>
+      <p *ngSwitchCase="'C'">Needs Improvement</p>
+      <p *ngSwitchDefault>Failed but Work Hard</p>
+    </div>
+
+    <p [ngClass]="{
+       'text-success': student.grade === 'A',
+       'text-warning': student.grade === 'B',
+       'text-danger': student.grade === 'C'
+    }">{{student.grade}}</p>
+  </div>
+</div>
